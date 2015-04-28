@@ -7,8 +7,24 @@ var av = function (i, validate){
   var _i;
   // our getter-setter-combo including validation
   var me = function (d){
-    if (!arguments.length) return _i;
+    if (!arguments.length) {
+      if (typeof _i === 'object'){
+        var o= {};
+        for (var prop in _i){
+          o[prop] = _i[prop]();
+        }
+        return o;
+      } else {
+        return _i;
+      }
+    }
     _i = validate(d);
+    // if _i is an object we expose the getter/setter methods of its attributes
+    if (typeof _i === 'object'){
+      for (var prop in _i){
+        me[prop] = _i[prop];
+      }
+    }
   }
   // we initialize the getter-setter-combo with the provided value
   me(i);
@@ -43,8 +59,9 @@ av.int = function (i){
 
 av.string = function (i){
   return av(i, function (d){
-    if (typeof d === 'string') return d;
-    throw "d is not a string";
+    if (typeof d === 'string') {
+      return d;
+    } else throw "d is not a string";
   });
 };
 
@@ -57,7 +74,7 @@ av.collection = function (i){
 };
 
 av.map = function (i, o){
-  var p = av(i, function (d){
+  return av(i, function (d){
     if (typeof d === 'object'){
       var _i = {};
       for (var prop in o){
@@ -66,15 +83,5 @@ av.map = function (i, o){
       return _i;
     } else throw "not a valid object";
   });
-  
-  p.asPOJO = function (){
-    var _i = {};
-    for (var prop in o){
-      _i[prop] = p()[prop]();
-    }
-    return _i;
-  };
-  
-  return p;
 };
 

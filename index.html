@@ -5,29 +5,29 @@
     <script type="text/javascript">
       var Person = function (i){
         var p = av.map(i, {
-          name: av.string,
+          fullName: av.string,
           age: av.int,
           walk: av.boolean
         });
         
         p.status = function (){
-          console.log(p().name() + ', age ' + p().age() + ', ' + ((p().walk()) ? 'is' : 'isn\'t') + ' walking towards Mordor.');
+          console.log(p.fullName() + ', age ' + p.age() + ', ' + ((p.walk()) ? 'is' : 'isn\'t') + ' walking towards Mordor.');
         };
         
         return p;
       };
 
       var Frodo = Person({
-        name: "Frodo Baggins",
+        fullName: "Frodo Baggins",
         age: 30,
         walk: false
       });
       
       Frodo.status();
-      Frodo().walk(true);
+      Frodo.walk(true);
       Frodo.status();
       
-      console.log("Frodo POJO", Frodo.asPOJO());
+      console.log("Frodo POJO", Frodo());
       
     </script>
   </head>
