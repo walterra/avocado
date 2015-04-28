@@ -17,17 +17,19 @@
         return p;
       };
 
-      var Frodo = Person({
-        fullName: "Frodo Baggins",
-        age: 30,
+      var Gandalf = Person({
+        fullName: "Gandalf the Grey",
+        age: 2019,
         walk: false
       });
       
-      Frodo.status();
-      Frodo.walk(true);
-      Frodo.status();
+      Gandalf.status();
+
+      Gandalf.walk(true);
+      Gandalf.fullName('Gandalf the White');
+      Gandalf.status();
       
-      console.log("Frodo POJO", Frodo());
+      console.log("Gandalf POJO", Gandalf());
       
     </script>
   </head>
