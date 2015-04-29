@@ -32,6 +32,16 @@ var av = function (i, validate){
   return me;
 };
 
+// isValid allows you to test if a value (v) is a valid type (t)
+av.isValid = function (t, v){
+  try {
+    t(v);
+    return true;
+  } catch (err) {
+    return false;
+  }
+};
+
 // a boolean type and its validation function
 av.boolean = function (i){
   // we return the av-factory which requires an initial value and 
@@ -41,7 +51,7 @@ av.boolean = function (i){
       return d;
     } else throw "d is not boolean";
   });
-}
+};
 
 av.int = function (i){
   return av(i, function (d){
