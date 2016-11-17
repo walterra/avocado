@@ -1,0 +1,36 @@
+{
+  "name": "avocado",
+  "version": "1.0.0-alpha.1",
+  "description": "A javascript type checker. Also a tasty fruit with megafauna dispersal syndrome, leading to an evolutionary anachronism.",
+  "main": "build/avocado.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walterra/avocado.git"
+  },
+  "keywords": [
+    "javascript",
+    "types"
+  ],
+  "author": "Walter Rafelsberger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/walterra/avocado/issues"
+  },
+  "scripts": {
+    "pretest": "rm -rf build && mkdir build && rollup -f umd -n avocado -o build/avocado.js -- index.js",
+    "test": "tape 'test/**/*-test.js'",
+    "prepublish": "npm run test && uglifyjs build/avocado.js -c -m -o build/avocado.min.js",
+    "postpublish": "zip -j build/avocado.zip -- LICENSE README.md build/avocado.js build/avocado.min.js"
+  },
+  "devDependencies": {
+    "catw": "^1.0.1",
+    "eslint": "^3.8.1",
+    "eslint-config-es5": "^0.5.0",
+    "rollup": "^0.36.3",
+    "rollup-plugin-eslint": "^3.0.0",
+    "rollup-watch": "^2.5.0",
+    "tape": "4",
+    "uglify-js": "2"
+  },
+  "homepage": "https://github.com/walterra/avocado#readme"
+}

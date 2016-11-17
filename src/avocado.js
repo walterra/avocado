@@ -21,11 +21,11 @@ var av = function (i, validate){
     _i = validate(d);
     // if _i is an object we expose the getter/setter methods of its attributes
     if (typeof _i === 'object'){
-      for (var prop in _i){
-        me[prop] = _i[prop];
+      for (var prop_object in _i){
+        me[prop_object] = _i[prop_object];
       }
     }
-  }
+  };
   // we initialize the getter-setter-combo with the provided value
   me(i);
   // return the getter-setter-combo (allows chaining, among other things)
@@ -49,18 +49,18 @@ av.boolean = function (i){
   return av(i, function (d){
     if (typeof d === 'boolean') {
       return d;
-    } else throw "d is not boolean";
+    } else throw 'd is not boolean';
   });
 };
 
 av.int = function (i){
   return av(i, function (d){
     if(typeof d !== 'number'){
-      throw "d is not a number";
+      throw 'd is not a number';
     }
 
     if(d % 1 !== 0){
-      throw "d is not an integer";
+      throw 'd is not an integer';
     }
     
     return d;
@@ -71,7 +71,7 @@ av.string = function (i){
   return av(i, function (d){
     if (typeof d === 'string') {
       return d;
-    } else throw "d is not a string";
+    } else throw 'd is not a string';
   });
 };
 
@@ -79,7 +79,7 @@ av.collection = function (i){
   return av(i, function (d){
     if (d && d.constructor === Array) {
       return d;
-    } else throw "not an array";
+    } else throw 'not an array';
   });
 };
 
@@ -91,7 +91,9 @@ av.map = function (i, o){
         _i[prop] = o[prop](d[prop]);
       }
       return _i;
-    } else throw "not a valid object";
+    } else throw 'not a valid object';
   });
 };
+
+export default av;
 

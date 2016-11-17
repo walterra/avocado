@@ -1,0 +1,96 @@
+var test = require('tape');
+var av = require('../');
+
+test('Integer', function(t) {
+  var i;
+  
+  var v = 1;
+  t.doesNotThrow(function() {
+    i = av.int(v);
+  }, 'Initializing integer 1.');
+  t.equals(i(), v, 'Integer returns 1.');
+
+  t.throws(function() {
+    i = av.int('1');
+  }, 'Initializing integer with String \'1\' throws an error.');
+
+  t.end();
+});
+
+test('Map', function(t) {
+  var Weapon;
+  var Person;
+  var Gandalf;
+  
+  t.doesNotThrow(function() {
+    Weapon = function (i){
+      var w = av.map(i, {
+        wName: av.string,
+        wType: av.string,
+        hitPoints: av.int,
+        speed: av.int,
+        isDrawn: av.boolean
+      });
+
+      w.status = function (){
+        return 'Weapon Status.';
+      };
+
+      return w;
+    };
+  }, 'Creating Weapon.');
+
+  t.doesNotThrow(function() {
+    Person = function (i){
+      var p = av.map(i, {
+        fullName: av.string,
+        age: av.int,
+        walk: av.boolean,
+        weapon: Weapon
+      });
+      
+      p.status = function (){
+        return p.fullName() + ', age ' + p.age() + ', ' + ((p.walk()) ? 'is' : 'isn\'t') + ' walking towards Mordor.';
+      };
+      
+      return p;
+    };
+  }, 'Creating Person.');
+
+
+  var weaponData = {
+    wName: 'Staff of Power',
+    wType: 'staff',
+    hitPoints: 65,
+    speed: 3,
+    isDrawn: false
+  };
+
+  var gandalfData = {
+    fullName: 'Gandalf the Grey',
+    age: 2019,
+    walk: false,
+    weapon: weaponData
+  };
+  
+  t.ok(av.isValid(Person, gandalfData), 'Check if Gandalf is a valid Person.');
+
+  t.doesNotThrow(function() {
+    Gandalf = Person(gandalfData);
+  }, 'Initialize Gandalf.');
+  
+  t.equals(Gandalf.status(), 'Gandalf the Grey, age 2019, isn\'t walking towards Mordor.', 'Check Gandalf\'s status.');
+
+  t.doesNotThrow(function() {
+    Gandalf.walk(true);
+    Gandalf.fullName('Gandalf the White');
+  }, 'Updating Gandalf.');
+
+  t.equals(Gandalf.status(), 'Gandalf the White, age 2019, is walking towards Mordor.', 'Check Gandalf\'s updated status.');
+  
+  t.deepEqual(Gandalf.weapon(), weaponData, 'Gandalf\'s weapon and the original data are matching.');
+
+  t.notDeepEqual(Gandalf(), gandalfData, 'Gandalf is not matching the original data because he\'s now white and marching towards Mordor.');
+
+  t.end();
+});
