@@ -1,0 +1,21 @@
+{
+  "name": "avocado-type-checker",
+  "description": "A javascript type checker. Also a tasty fruit with megafauna dispersal syndrome, leading to an evolutionary anachronism.",
+  "main": "build/avocado.js",
+  "authors": [
+    "Walter Rafelsberger"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "types"
+  ],
+  "homepage": "https://github.com/walterra/avocado",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
