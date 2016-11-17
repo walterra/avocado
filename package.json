@@ -1,6 +1,6 @@
 {
-  "name": "avocado",
-  "version": "1.0.0-alpha.1",
+  "name": "avocado-type-checker",
+  "version": "1.0.0-alpha.2",
   "description": "A javascript type checker. Also a tasty fruit with megafauna dispersal syndrome, leading to an evolutionary anachronism.",
   "main": "build/avocado.js",
   "repository": {
