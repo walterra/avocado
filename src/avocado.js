@@ -53,16 +53,25 @@ av.boolean = function (i){
   });
 };
 
+// http://stackoverflow.com/a/20779354/2266116
+var isInteger = function (nVal){
+  return typeof nVal === 'number' && isFinite(nVal) && nVal > -9007199254740992 && nVal < 9007199254740992 && Math.floor(nVal) === nVal;
+};
+
 av.int = function (i){
   return av(i, function (d){
-    if(typeof d !== 'number'){
-      throw 'd is not a number';
-    }
-
-    if(d % 1 !== 0){
+    if(!isInteger(d)) {
       throw 'd is not an integer';
     }
-    
+    return d;
+  });
+};
+
+av.float = function (i){
+  return av(i, function(d){
+    if(typeof d !== 'number') {
+      throw 'd is not a number';
+    }
     return d;
   });
 };

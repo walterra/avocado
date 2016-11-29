@@ -1,14 +1,19 @@
 var test = require('tape');
 var av = require('../');
 
-test('Integer', function(t) {
+test('av.int', function(t) {
   var i;
-  
+
   var v = 1;
   t.doesNotThrow(function() {
     i = av.int(v);
   }, 'Initializing integer 1.');
   t.equals(i(), v, 'Integer returns 1.');
+
+  v = 1.1;
+  t.throws(function() {
+    i = av.int(v);
+  }, 'Initializing integer with float 1.1 throws an error.');
 
   t.throws(function() {
     i = av.int('1');
@@ -17,7 +22,29 @@ test('Integer', function(t) {
   t.end();
 });
 
-test('Map', function(t) {
+test('av.float', function(t) {
+  var i;
+  
+  var v = 1;
+  t.doesNotThrow(function() {
+    i = av.float(v);
+  }, 'Initializing float 1.');
+  t.equals(i(), v, 'Float returns 1.');
+
+  v = 0.1;
+  t.doesNotThrow(function() {
+    i = av.float(v);
+  }, 'Initializing float 1.1.');
+  t.equals(i(), v, 'Float returns 1.1');
+
+  t.throws(function() {
+    i = av.float('1');
+  }, 'Initializing float with String \'1\' throws an error.');
+
+  t.end();
+});
+
+test('av.map', function(t) {
   var Weapon;
   var Person;
   var Gandalf;
