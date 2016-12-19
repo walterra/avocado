@@ -1,4 +1,5 @@
-import findIndex from 'lodash/findIndex';
+// importing with relative path so it gets included in the final build
+import { default as _findIndex } from '../node_modules/lodash-es/findIndex';
 
 var types = [];
 
@@ -51,7 +52,7 @@ av.type = function() {
   }
 
   typeName = arguments[0];
-  typeIndex = findIndex(types, { typeName: typeName });
+  typeIndex = _findIndex(types, { typeName: typeName });
 
   // get a type by name
   if (arguments.length === 1) {
