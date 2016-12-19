@@ -32,5 +32,8 @@
     "tape": "4",
     "uglify-js": "2"
   },
-  "homepage": "https://github.com/walterra/avocado#readme"
+  "homepage": "https://github.com/walterra/avocado#readme",
+  "dependencies": {
+    "lodash": "^4.17.2"
+  }
 }
