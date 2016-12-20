@@ -1,6 +1,6 @@
 {
   "name": "avocado-type-checker",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "A javascript type checker. Also a tasty fruit with megafauna dispersal syndrome, leading to an evolutionary anachronism.",
   "main": "build/avocado.js",
   "repository": {
@@ -17,10 +17,10 @@
     "url": "https://github.com/walterra/avocado/issues"
   },
   "scripts": {
-    "pretest": "rm -rf build && mkdir build && rollup -f umd -n avocado -o build/avocado.js -- index.js",
+    "pretest": "rm -rf build && mkdir build && rollup -c rollup_umd.config.js && rollup -c rollup_es.config.js && rollup -c rollup.config.js",
     "test": "tape 'test/**/*-test.js'",
-    "prepublish": "npm run test && uglifyjs build/avocado.js -c -m -o build/avocado.min.js",
-    "postpublish": "zip -j build/avocado.zip -- LICENSE README.md build/avocado.js build/avocado.min.js"
+    "prepublish": "npm run test && uglifyjs build/avocado_umd.js -c -m -o build/avocado_umd.min.js",
+    "postpublish": "zip -j build/avocado.zip -- LICENSE README.md build/avocado.js build/avocado_es.js build/avocado_umd.js build/avocado_umd.min.js"
   },
   "devDependencies": {
     "catw": "^1.0.1",
@@ -28,12 +28,10 @@
     "eslint-config-es5": "^0.5.0",
     "rollup": "^0.36.3",
     "rollup-plugin-eslint": "^3.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-watch": "^2.5.0",
     "tape": "4",
     "uglify-js": "2"
   },
-  "homepage": "https://github.com/walterra/avocado#readme",
-  "dependencies": {
-    "lodash-es": "^4.17.2"
-  }
+  "homepage": "https://github.com/walterra/avocado#readme"
 }

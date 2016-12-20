@@ -1,5 +1,4 @@
-// importing with relative path so it gets included in the final build
-import { default as _findIndex } from '../node_modules/lodash-es/findIndex';
+import { default as findByType } from './findByType';
 
 var types = [];
 
@@ -19,7 +18,7 @@ var av = function (i, validate){
   var me = function (d){
     if (!arguments.length) {
       if (typeof _i === 'object'){
-        var o= {};
+        var o = {};
         for (var prop in _i){
           o[prop] = _i[prop]();
         }
@@ -52,7 +51,7 @@ av.type = function() {
   }
 
   typeName = arguments[0];
-  typeIndex = _findIndex(types, { typeName: typeName });
+  typeIndex = findByType(types, typeName);
 
   // get a type by name
   if (arguments.length === 1) {
@@ -144,16 +143,6 @@ av.type('collection', function (d){
   if (d && d.constructor === Array) {
     return d;
   } else throw 'not an array';
-});
-
-av.type('map', function (d){
-  if (typeof d === 'object'){
-    var _i = {};
-    for (var prop in o){
-      _i[prop] = o[prop](d[prop]);
-    }
-    return _i;
-  } else throw 'not a valid object';
 });
 
 export default av;

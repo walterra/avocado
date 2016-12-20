@@ -1,5 +1,5 @@
 var test = require('tape');
-var av = require('../');
+var av = require('../build/avocado');
 
 test('av.type', function(t) {
   t.doesNotThrow(function() {
