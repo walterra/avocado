@@ -23,7 +23,6 @@
     "postpublish": "zip -j build/avocado.zip -- LICENSE README.md build/avocado.js build/avocado_es.js build/avocado_umd.js build/avocado_umd.min.js"
   },
   "devDependencies": {
-    "catw": "^1.0.1",
     "eslint": "^3.8.1",
     "eslint-config-es5": "^0.5.0",
     "rollup": "^0.36.3",
@@ -31,7 +30,7 @@
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-watch": "^2.5.0",
     "tape": "4",
-    "uglify-js": "2"
+    "uglify-js": ">=2.6.0"
   },
   "homepage": "https://github.com/walterra/avocado#readme"
 }
