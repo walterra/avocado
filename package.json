@@ -19,7 +19,7 @@
   "scripts": {
     "pretest": "rm -rf build && mkdir build && rollup -c rollup_umd.config.js && rollup -c rollup_es.config.js && rollup -c rollup.config.js",
     "test": "tape 'test/**/*-test.js'",
-    "prepublish": "npm run test && uglifyjs build/avocado_umd.js -c -m -o build/avocado_umd.min.js",
+    "prepare": "npm run test && uglifyjs build/avocado_umd.js -c -m -o build/avocado_umd.min.js",
     "postpublish": "zip -j build/avocado.zip -- LICENSE README.md build/avocado.js build/avocado_es.js build/avocado_umd.js build/avocado_umd.min.js"
   },
   "devDependencies": {
@@ -29,6 +29,7 @@
     "rollup-plugin-eslint": "^3.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-watch": "^2.5.0",
+    "shelljs": "^0.8.3",
     "tape": "4",
     "uglify-js": ">=2.6.0"
   },
